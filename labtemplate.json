@@ -40,64 +40,92 @@
             ]
         },
         "subnetName": {
-            "type": "string"
+            "type": "string",
+            "value": "default"
         },
         "virtualNetworkName": {
-            "type": "string"
+            "type": "string",
+            "value": "LabRG-vnet"
         },
         "addressPrefixes": {
-            "type": "array"
+            "type": "array",
+            "value": [
+                "10.0.0.0/16"
+            ]
         },
         "subnets": {
-            "type": "array"
+            "type": "array",
+            "value": [
+                {
+                    "name": "default",
+                    "properties": {
+                        "addressPrefix": "10.0.0.0/24"
+                    }
+                }
+            ]
         },
         "publicIpAddressName": {
-            "type": "string"
+            "type": "string",
+            "value": "LabVM1-ip"
         },
         "publicIpAddressType": {
-            "type": "string"
+            "type": "string",
+            "value": "Static"
         },
         "publicIpAddressSku": {
-            "type": "string"
+            "type": "string",
+            "value": "Standard"
         },
         "pipDeleteOption": {
-            "type": "string"
+            "type": "string",
+            "value": "Detach"
         },
         "virtualMachineName": {
-            "type": "string"
+            "type": "string",
+            "value": "LabVM1"
         },
         "virtualMachineComputerName": {
-            "type": "string"
+            "type": "string",
+            "value": "LabVM1"
         },
         "virtualMachineRG": {
-            "type": "string"
+            "type": "string",
+            "value": "LabRG"
         },
         "osDiskType": {
-            "type": "string"
+            "type": "string",
+            "value": "Premium_LRS"
         },
         "osDiskDeleteOption": {
-            "type": "string"
+            "type": "string",
+            "value": "Delete"
         },
         "virtualMachineSize": {
-            "type": "string"
+            "type": "string",
+            "value": "Standard_D2s_v3"
         },
         "nicDeleteOption": {
-            "type": "string"
+            "type": "string",
+            "value": "Detach"
         },
         "adminUsername": {
-            "type": "string"
+            "type": "string",
+            "value": "dfrancis"
         },
         "adminPassword": {
             "type": "secureString"
         },
         "patchMode": {
-            "type": "string"
+            "type": "string",
+            "value": "AutomaticByOS"
         },
         "enableHotpatching": {
-            "type": "bool"
+            "type": "bool",
+            "value": false
         },
         "zone": {
-            "type": "string"
+            "type": "string",
+            "value": "1"
         }
     },
     "variables": {
