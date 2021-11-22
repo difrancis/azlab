@@ -11,19 +11,33 @@
         },
         "networkInterfaceName": {
             "type": "string",
-            "defaultValue": "labvm1584",
-            "metadata": {
-              "description": "The location in which the resources should be deployed."
-            }
+            "defaultValue": "labvm1584"
         },
         "enableAcceleratedNetworking": {
-            "type": "bool"
+            "type": "bool",
+            "value": true
         },
         "networkSecurityGroupName": {
-            "type": "string"
+            "type": "string",
+            "value": "LabVM1-nsg"
         },
         "networkSecurityGroupRules": {
-            "type": "array"
+            "type": "array",
+            "value": [
+                {
+                    "name": "RDP",
+                    "properties": {
+                        "priority": 300,
+                        "protocol": "TCP",
+                        "access": "Allow",
+                        "direction": "Inbound",
+                        "sourceAddressPrefix": "*",
+                        "sourcePortRange": "*",
+                        "destinationAddressPrefix": "*",
+                        "destinationPortRange": "3389"
+                    }
+                }
+            ]
         },
         "subnetName": {
             "type": "string"
