@@ -88,6 +88,9 @@
         "adminUsername": {
             "value": "dfrancis"
         },
+        "adminPassword": {
+            "value": null
+        },
         "patchMode": {
             "value": "AutomaticByOS"
         },
