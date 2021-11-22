@@ -10,7 +10,11 @@
               }
         },
         "networkInterfaceName": {
-            "type": "string"
+            "type": "string",
+            "defaultValue": "labvm1584",
+            "metadata": {
+              "description": "The location in which the resources should be deployed."
+            }
         },
         "enableAcceleratedNetworking": {
             "type": "bool"
