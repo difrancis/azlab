@@ -10,122 +10,76 @@
               }
         },
         "networkInterfaceName": {
-            "type": "string",
-            "defaultValue": "labvm1584"
+            "type": "string"
         },
         "enableAcceleratedNetworking": {
-            "type": "bool",
-            "value": true
+            "type": "bool"
         },
         "networkSecurityGroupName": {
-            "type": "string",
-            "value": "LabVM1-nsg"
+            "type": "string"
         },
         "networkSecurityGroupRules": {
-            "type": "array",
-            "value": [
-                {
-                    "name": "RDP",
-                    "properties": {
-                        "priority": 300,
-                        "protocol": "TCP",
-                        "access": "Allow",
-                        "direction": "Inbound",
-                        "sourceAddressPrefix": "*",
-                        "sourcePortRange": "*",
-                        "destinationAddressPrefix": "*",
-                        "destinationPortRange": "3389"
-                    }
-                }
-            ]
+            "type": "array"
         },
         "subnetName": {
-            "type": "string",
-            "value": "default"
+            "type": "string"
         },
         "virtualNetworkName": {
-            "type": "string",
-            "value": "LabRG-vnet"
+            "type": "string"
         },
         "addressPrefixes": {
-            "type": "array",
-            "value": [
-                "10.0.0.0/16"
-            ]
+            "type": "array"
         },
         "subnets": {
-            "type": "array",
-            "value": [
-                {
-                    "name": "default",
-                    "properties": {
-                        "addressPrefix": "10.0.0.0/24"
-                    }
-                }
-            ]
+            "type": "array"
         },
         "publicIpAddressName": {
-            "type": "string",
-            "value": "LabVM1-ip"
+            "type": "string"
         },
         "publicIpAddressType": {
-            "type": "string",
-            "value": "Static"
+            "type": "string"
         },
         "publicIpAddressSku": {
-            "type": "string",
-            "value": "Standard"
+            "type": "string"
         },
         "pipDeleteOption": {
-            "type": "string",
-            "value": "Detach"
+            "type": "string"
         },
         "virtualMachineName": {
-            "type": "string",
-            "value": "LabVM1"
+            "type": "string"
         },
         "virtualMachineComputerName": {
-            "type": "string",
-            "value": "LabVM1"
+            "type": "string"
         },
         "virtualMachineRG": {
-            "type": "string",
-            "value": "LabRG"
+            "type": "string"
         },
         "osDiskType": {
-            "type": "string",
-            "value": "Premium_LRS"
+            "type": "string"
         },
         "osDiskDeleteOption": {
-            "type": "string",
-            "value": "Delete"
+            "type": "string"
         },
         "virtualMachineSize": {
-            "type": "string",
-            "value": "Standard_D2s_v3"
+            "type": "string"
         },
         "nicDeleteOption": {
-            "type": "string",
-            "value": "Detach"
+            "type": "string"
         },
         "adminUsername": {
-            "type": "string",
-            "value": "dfrancis"
+            "type": "string"
         },
         "adminPassword": {
             "type": "secureString"
         },
         "patchMode": {
-            "type": "string",
-            "value": "AutomaticByOS"
+            "type": "string"
         },
         "enableHotpatching": {
-            "type": "bool",
-            "value": false
+            "type": "bool"
         },
         "zone": {
-            "type": "string",
-            "value": "1"
+            "type": "string"
         }
     },
     "variables": {
