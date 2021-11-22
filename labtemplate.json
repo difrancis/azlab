@@ -19,7 +19,7 @@
         },
         "networkSecurityGroupName": {
             "type": "string",
-            "value": "LabVM1-nsg"
+            "value": "LabVM1-nsg1"
         },
         "networkSecurityGroupRules": {
             "type": "array",
