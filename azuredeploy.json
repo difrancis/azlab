@@ -48,20 +48,27 @@
     "variables": {
       "namingInfix": "[toLower(substring(concat(parameters('ResourceSuffix'), uniqueString(resourceGroup().id)), 0, 9))]",
       "longNamingInfix": "[toLower(parameters('ResourceSuffix'))]",
-      "jumpBoxName": "[concat(variables('namingInfix'), 'jbox')]",
-      "jumpBoxSAName": "[concat(uniqueString(concat(resourceGroup().id, variables('newStorageAccountSuffix'), 'jumpboxsa')), 'jb')]",
+      "jumpBoxName": "[concat(variables('namingInfix'), 'srv1')]",
+      "jumpBoxName2": "[concat(variables('namingInfix'), 'srv2')]",
+      "jumpBoxSAName": "[concat(uniqueString(concat(resourceGroup().id, variables('newStorageAccountSuffix'), 'srvsa')), 'jb')]",
       "jumpBoxOSDiskName": "[concat(variables('jumpBoxName'), '_OSDisk')]",
-      "jumpBoxIPConfigName": "[concat(variables('jumpBoxName'), 'ipconfig')]",
-      "jumpBoxNicName": "[concat(variables('jumpBoxName'), 'nic')]",
+      "jumpBoxOSDiskName2": "[concat(variables('jumpBoxName2'), '_OSDisk')]",
+      "jumpBoxIPConfigName": "[concat(variables('jumpBoxName'), 'ipconfig1')]",
+      "jumpBoxIPConfigName2": "[concat(variables('jumpBoxName2'), 'ipconfig2')]",
+      "jumpBoxNicName": "[concat(variables('jumpBoxName'), 'nic1')]",
+      "jumpBoxNicName2": "[concat(variables('jumpBoxName2'), 'nic2')]",
       "newStorageAccountSuffix": "[concat(variables('namingInfix'), 'sa')]",
       "addressPrefix": "10.0.0.0/16",
       "subnetPrefix": "10.0.0.0/24",
       "virtualNetworkName": "[concat(variables('namingInfix'), 'vnet')]",
       "subnetName": "[concat(variables('namingInfix'), 'subnet')]",
       "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), variables('subnetName'))]",
-      "publicIPAddressName": "[concat(variables('namingInfix'), 'pip')]",
-      "nicName": "[concat(variables('namingInfix'), 'nic')]",
-      "ipConfigName": "[concat(variables('namingInfix'), 'ipconfig')]",
+      "publicIPAddressName": "[concat(variables('namingInfix'), 'pip1')]",
+      "publicIPAddressName2": "[concat(variables('namingInfix'), 'pip2')]",
+      "nicName": "[concat(variables('namingInfix'), 'nic1')]",
+      "nicName2": "[concat(variables('namingInfix'), 'nic2')]",
+      "ipConfigName": "[concat(variables('namingInfix'), 'ipconfig1')]",
+      "ipConfigName2": "[concat(variables('namingInfix'), 'ipconfig2')]",
       "osType": {
         "publisher": "MicrosoftWindowsServer",
         "offer": "WindowsServer",
@@ -145,6 +152,18 @@
         }
       },
       {
+        "type": "Microsoft.Network/publicIPAddresses",
+        "name": "[variables('publicIPAddressName2')]",
+        "location": "[parameters('location')]",
+        "apiVersion": "2020-07-01",
+        "properties": {
+          "publicIPAllocationMethod": "Dynamic",
+          "dnsSettings": {
+            "domainNameLabel": "[variables('longNamingInfix')]"
+          }
+        }
+      },
+      {
         "type": "Microsoft.Network/networkInterfaces",
         "name": "[variables('jumpBoxNicName')]",
         "location": "[parameters('location')]",
@@ -161,6 +180,32 @@
                 "privateIPAllocationMethod": "Dynamic",
                 "publicIPAddress": {
                   "id": "[resourceId('Microsoft.Network/publicIPAddresses',variables('publicIPAddressName'))]"
+                },
+                "subnet": {
+                  "id": "[variables('subnetRef')]"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "type": "Microsoft.Network/networkInterfaces",
+        "name": "[variables('jumpBoxNicName2')]",
+        "location": "[parameters('location')]",
+        "apiVersion": "2020-07-01",
+        "dependsOn": [
+          "[resourceId('Microsoft.Network/publicIPAddresses', variables('publicIPAddressName2'))]",
+          "[resourceId('Microsoft.Network/virtualNetworks', variables('virtualNetworkName'))]"
+        ],
+        "properties": {
+          "ipConfigurations": [
+            {
+              "name": "[variables('jumpBoxIPConfigName2')]",
+              "properties": {
+                "privateIPAllocationMethod": "Dynamic",
+                "publicIPAddress": {
+                  "id": "[resourceId('Microsoft.Network/publicIPAddresses',variables('publicIPAddressName2'))]"
                 },
                 "subnet": {
                   "id": "[variables('subnetRef')]"
@@ -200,6 +245,47 @@
             "networkInterfaces": [
               {
                 "id": "[resourceId('Microsoft.Network/networkInterfaces',variables('jumpBoxNicName'))]"
+              }
+            ]
+          },
+          "diagnosticsProfile": {
+            "bootDiagnostics": {
+              "enabled": true,
+              "storageUri": "[reference(resourceId('Microsoft.Storage/storageAccounts', variables('jumpBoxSAName')), '2019-06-01').primaryEndpoints['blob']]"
+            }
+          }
+        }
+      }
+      {
+        "type": "Microsoft.Compute/virtualMachines",
+        "name": "[variables('jumpBoxName2')]",
+        "location": "[parameters('location')]",
+        "apiVersion": "2020-12-01",
+        "dependsOn": [
+          "[resourceId('Microsoft.Storage/storageAccounts', variables('jumpBoxSAName'))]",
+          "[resourceId('Microsoft.Network/networkInterfaces', variables('jumpBoxNicName2'))]"
+        ],
+        "properties": {
+          "hardwareProfile": {
+            "vmSize": "[parameters('vmSku')]"
+          },
+          "osProfile": {
+            "computerName": "[variables('jumpBoxName2')]",
+            "adminUsername": "[parameters('adminUsername')]",
+            "adminPassword": "[parameters('adminPassword')]"
+          },
+          "storageProfile": {
+            "imageReference": "[variables('imageReference')]",
+            "osDisk": {
+              "name": "[variables('jumpBoxOSDiskName2')]",
+              "caching": "ReadWrite",
+              "createOption": "FromImage"
+            }
+          },
+          "networkProfile": {
+            "networkInterfaces": [
+              {
+                "id": "[resourceId('Microsoft.Network/networkInterfaces',variables('jumpBoxNicName2'))]"
               }
             ]
           },
