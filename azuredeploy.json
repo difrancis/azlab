@@ -47,7 +47,8 @@
     },
     "variables": {
       "namingInfix": "[toLower(substring(concat(parameters('ResourceSuffix'), uniqueString(resourceGroup().id)), 0, 9))]",
-      "longNamingInfix": "[toLower(parameters('ResourceSuffix'))]",
+      "longNamingInfix": "[concat(variables('namingInfix'), 'srv1')]",
+      "longNamingInfix2": "[concat(variables('namingInfix'), 'srv2')]",
       "jumpBoxName": "[concat(variables('namingInfix'), 'srv1')]",
       "jumpBoxName2": "[concat(variables('namingInfix'), 'srv2')]",
       "jumpBoxSAName": "[concat(uniqueString(concat(resourceGroup().id, variables('newStorageAccountSuffix'), 'srvsa')), 'jb')]",
@@ -159,7 +160,7 @@
         "properties": {
           "publicIPAllocationMethod": "Dynamic",
           "dnsSettings": {
-            "domainNameLabel": "[variables('longNamingInfix')]"
+            "domainNameLabel": "[variables('longNamingInfix2')]"
           }
         }
       },
