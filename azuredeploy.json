@@ -48,7 +48,6 @@
     "variables": {
       "namingInfix": "[toLower(substring(concat(parameters('ResourceSuffix'), uniqueString(resourceGroup().id)), 0, 9))]",
       "longNamingInfix": "[concat(variables('ResourceSuffix'))]",
-      "longNamingInfix2": "[concat(variables('ResourceSuffix'), '2')]",
       "jumpBoxName": "[concat(variables('namingInfix'), 'srv1')]",
       "jumpBoxName2": "[concat(variables('namingInfix'), 'srv2')]",
       "jumpBoxSAName": "[concat(uniqueString(concat(resourceGroup().id, variables('newStorageAccountSuffix'), 'srvsa')), 'jb')]",
