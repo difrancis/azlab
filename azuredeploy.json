@@ -151,6 +151,18 @@
           }
         }
       },
+      {
+        "type": "Microsoft.Network/publicIPAddresses",
+        "name": "[variables('publicIPAddressName2')]",
+        "location": "[parameters('location')]",
+        "apiVersion": "2020-07-01",
+        "properties": {
+          "publicIPAllocationMethod": "Dynamic",
+          "dnsSettings": {
+            "domainNameLabel": "[variables('longNamingInfix')]"
+          }
+        }
+      },
        {
         "type": "Microsoft.Network/networkInterfaces",
         "name": "[variables('jumpBoxNicName')]",
